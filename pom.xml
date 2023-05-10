@@ -56,7 +56,12 @@
             <type>lutece-plugin</type>
         </dependency>
     </dependencies>
-
+    <scm>
+        <connection>scm:git:https://github.com/lutece-platform/lutece-cms-module-htmlpage-rest.git</connection>
+        <developerConnection>scm:git:https://github.com/lutece-platform/lutece-cms-module-htmlpage-rest.git</developerConnection>
+        <url>https://github.com/lutece-platform/lutece-cms-module-htmlpage-rest.git</url>
+        <tag>HEAD</tag>
+    </scm>
     <properties>
         <componentName>htmlpage-rest</componentName>
         <jiraProjectName>HTMLPAGEREST</jiraProjectName>
