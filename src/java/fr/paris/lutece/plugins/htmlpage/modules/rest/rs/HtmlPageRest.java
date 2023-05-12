@@ -83,7 +83,7 @@ public class HtmlPageRest
         if ( nVersion == VERSION_1 )
         {            
             AllowCorsOriginUtil.setResponse( responseBuilder, request );         
-            return getHtmlPageV1( id, idDefault );
+            return getHtmlPageV1( responseBuilder, id, idDefault );
         }
         AppLogService.error( Constants.ERROR_NOT_FOUND_VERSION );
         return responseBuilder.status( Response.Status.NOT_FOUND ).entity( JsonUtil.buildJsonResponse( new ErrorJsonResponse( Response.Status.NOT_FOUND.name( ), Constants.ERROR_NOT_FOUND_VERSION ) ) )
@@ -99,7 +99,7 @@ public class HtmlPageRest
      *            the idDefault
      * @return the HtmlPage for the version 1
      */
-    private Response getHtmlPageV1( int id, int idDefault )
+    private Response getHtmlPageV1( ResponseBuilder responseBuilder, int id, int idDefault )
     {
         HtmlPage htmlPage = HtmlPageService.getInstance( ).getHtmlPageCache( id );
         
@@ -111,11 +111,11 @@ public class HtmlPageRest
         if ( htmlPage == null || HtmlPageUtil.isRoleExist( htmlPage.getRole( ) ) )
         {
             AppLogService.error( Constants.ERROR_NOT_FOUND_RESOURCE );
-            return Response.status( Response.Status.NOT_FOUND ).entity( JsonUtil.buildJsonResponse( new ErrorJsonResponse( Response.Status.NOT_FOUND.name( ), Constants.ERROR_NOT_FOUND_RESOURCE ) ) )
+            return responseBuilder.status( Response.Status.NOT_FOUND ).entity( JsonUtil.buildJsonResponse( new ErrorJsonResponse( Response.Status.NOT_FOUND.name( ), Constants.ERROR_NOT_FOUND_RESOURCE ) ) )
                     .build( );
         }
 
-        return Response.status( Response.Status.OK ).entity( JsonUtil.buildJsonResponse( new JsonResponse( htmlPage.getHtmlContent( ) ) ) ).build( );
+        return responseBuilder.status( Response.Status.OK ).entity( JsonUtil.buildJsonResponse( new JsonResponse( htmlPage.getHtmlContent( ) ) ) ).build( );
     }
 
 }
